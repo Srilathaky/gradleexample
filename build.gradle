@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+}
+
+group 'testgradle'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+task execute(dependsOn: 'classes')
+dependencies {
+    // https://mvnrepository.com/artifact/org.testng/testng
+    compile group: 'org.testng', name: 'testng', version: '6.14.3'
+// https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+
+}
+test {
+    useTestNG() {
+       // useDefaultListeners = true
+        suites 'src/test/resources/testng.xml'
+    }
+
+}
+
+task runTests(type: JavaExec, dependsOn: 'classes') {
+    main = 'org.testng.TestNG'
+    classpath = files("src/test/java/test_gradle/Test_One.class",
+            project.sourceSets.main.compileClasspath,
+            project.sourceSets.test.compileClasspath,
+            project.sourceSets.main.runtimeClasspath,
+            project.sourceSets.test.runtimeClasspath)
+    args = ["-parallel",  "methods", "-threadcount", "1", "-d", "./build/test-output", "./src/test/resources/testng.xml"]
+}

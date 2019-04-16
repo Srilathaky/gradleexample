@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite"><test verbose="2" preserve-order="true" name="/Users/srilatha.y/Documents/Srilatha/Docker_Practise/src/test/java/test_gradle/Test_One.java">
+    <classes>
+    <class name="test_gradle.Test_One">
+        <methods><include name="testone"/>
+        </methods>
+    </class>
+</classes>
+</test>
+</suite>
